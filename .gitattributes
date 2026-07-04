@@ -1,0 +1,2 @@
+# Keep validation scripts from dominating GitHub language statistics.
+scripts/check.ps1 linguist-vendored
