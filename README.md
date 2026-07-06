@@ -10,7 +10,7 @@ This repo tracks coming-soon integration notes for Seedance 2.5, based on the cu
 
 Use this repo to follow expected workflows, compare Seedance 2.5 with Seedance 2 and Seedance 2 Mini, and prepare your backend integration plan before launch.
 
-[Model Page](https://poyo.ai/models/seedance-2-5) | [Main Examples](https://github.com/PoyoAPI/poyo-examples) | [Seedance 2 Examples](https://github.com/PoyoAPI/seedance-2-api)
+[Try on PoYo](https://poyo.ai/models/seedance-2-5) | [Main Examples](https://github.com/PoyoAPI/poyo-examples) | [Seedance 2 Examples](https://github.com/PoyoAPI/seedance-2-api)
 
 ## Current Status
 
