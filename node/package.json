@@ -1,0 +1,9 @@
+{
+  "name": "poyo-seedance-2-5-api-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs"
+  }
+}
+
