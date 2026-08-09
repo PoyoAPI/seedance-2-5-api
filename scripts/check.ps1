@@ -30,3 +30,4 @@ foreach ($file in $files) {
   if ($text -match "poyo_[A-Za-z0-9_-]{20,}") { throw "Possible API key in $($file.FullName)" }
 }
 Write-Host "All checks passed."
+exit 0
