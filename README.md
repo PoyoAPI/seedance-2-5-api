@@ -1,112 +1,90 @@
-# Seedance 2.5 API Coming Soon Notes for PoYo
+# Seedance 2.5 API: runnable cURL and Node.js examples
 
-[![Model page](https://img.shields.io/badge/Model%20page-seedance--2--5-84cc16)](https://poyo.ai/models/seedance-2-5)
-[![Status](https://img.shields.io/badge/Status-Coming%20Soon-f59e0b)](https://poyo.ai/models/seedance-2-5)
-[![Main examples](https://img.shields.io/badge/Main%20examples-PoyoAPI%2Fpoyo--examples-0f172a?logo=github)](https://github.com/PoyoAPI/poyo-examples)
+[![PoYo model page](https://img.shields.io/badge/Try%20on%20PoYo-seedance--2--5--api-84cc16)](https://poyo.ai/models/seedance-2-5) [![API docs](https://img.shields.io/badge/API-docs-22d3ee)](https://docs.poyo.ai/api-manual/video-series/seedance-2.5) [![Check](https://github.com/PoyoAPI/seedance-2-5-api/actions/workflows/check.yml/badge.svg)](https://github.com/PoyoAPI/seedance-2-5-api/actions/workflows/check.yml)
 
-Seedance 2.5 is not generally available on PoYo yet.
+Generate controllable 4-30 second videos with text, image, video, and audio references through PoYo's unified async API.
 
-This repo tracks coming-soon integration notes for Seedance 2.5, based on the current PoYo model page and expected public capabilities. It is not a runnable API example yet.
+**Answer:** To use the Seedance 2.5 API, send a server-side request to `POST https://api.poyo.ai/api/generate/submit` with model `seedance-2.5` and a PoYo API key. The examples in this repository are runnable with Node.js 22+ or cURL.
 
-Use this repo to follow expected workflows, compare Seedance 2.5 with Seedance 2 and Seedance 2 Mini, and prepare your backend integration plan before launch.
+Last verified against the live PoYo schema and pricing on **August 9, 2026**.
 
-[Try on PoYo](https://poyo.ai/models/seedance-2-5) | [Main Examples](https://github.com/PoyoAPI/poyo-examples) | [Seedance 2 Examples](https://github.com/PoyoAPI/seedance-2-api)
+## Quickstart
 
-## Current Status
+1. Create a key in the [PoYo dashboard](https://poyo.ai/dashboard/api-key).
+2. Copy `.env.example` to `.env` and replace the placeholder.
+3. Run `node node/index.mjs`.
 
-Seedance 2.5 is marked as `Coming Soon` on PoYo.
+```dotenv
+POYO_API_KEY=YOUR_POYO_API_KEY_HERE
+POYO_BASE_URL=https://api.poyo.ai
+```
 
-PoYo will add runnable examples only after the production API path, model ID, request schema, pricing, and output behavior are confirmed.
+The complete cURL request is in [curl/generate.md](curl/generate.md). The Node.js example submits the task and polls until `finished` or `failed`.
 
-Do not use this repo as a live submit example yet.
+## Model IDs
 
-## Expected Capabilities
+- `seedance-2.5`
 
-Seedance 2.5 is expected to focus on longer and more controllable video generation workflows:
+Use the exact IDs above. Product names and API model IDs are not always identical.
 
-- Native 30-second single-segment video
-- Up to 4K-oriented output workflows
-- Up to 50 multimodal references
-- Text, image, video, audio, style, and pre-viz references
-- Region-level editing and stronger refinement controls
-- Better character, motion, lighting, and long-scene continuity
-- Improved continuation for longer narrative scenes
+## Request fields
 
-Final API behavior may change before public availability.
+| Field | Requirement | Meaning |
+| --- | --- | --- |
+| prompt | required | Video description. |
+| duration | required | Integer from 4 to 30 seconds. |
+| resolution | required | 480p or 720p. |
+| aspect_ratio | optional | auto, 21:9, 16:9, 4:3, 1:1, 3:4, or 9:16. |
+| image_urls | optional | One or two images for first/last-frame generation. |
+| reference_image_urls | optional | Up to 30 reference images. |
+| reference_video_urls | optional | Up to 10 reference videos. |
+| reference_audio_urls | optional | Up to 10 reference audio files. |
+| generate_audio | optional | Boolean audio-generation switch. |
 
-## Best Fit
+## Pricing snapshot
 
-Seedance 2.5 is expected to be useful for:
-
-- Brand ads and commercial storytelling
-- Social video, UGC, and short drama scenes
-- E-commerce product showcases
-- Film, TV, and storyboard pre-visualization
-- Gaming cutscenes and virtual world previews
-- Enterprise training and internal video workflows
-
-## What To Use Today
-
-For runnable PoYo video examples today, start here:
-
-| Need | Use |
+| Usage | Price |
 | --- | --- |
-| Seedance production video workflows | [PoyoAPI/seedance-2-api](https://github.com/PoyoAPI/seedance-2-api) |
-| Lower-cost Seedance drafts | `seedance-2-mini` in [PoyoAPI/seedance-2-api](https://github.com/PoyoAPI/seedance-2-api) |
-| Fast multi-shot video drafts | [PoyoAPI/kling-3-0-turbo-api](https://github.com/PoyoAPI/kling-3-0-turbo-api) |
-| Veo 3.1 video workflows | [PoyoAPI/veo-3-1-official-api](https://github.com/PoyoAPI/veo-3-1-official-api) |
-| General async media examples | [PoyoAPI/poyo-examples](https://github.com/PoyoAPI/poyo-examples) |
+| 480p, no reference video | $0.14 per output second |
+| 480p, with reference video | $0.085 per billed second |
+| 720p, no reference video | $0.315 per output second |
+| 720p, with reference video | $0.19 per billed second |
 
-## Expected PoYo Workflow
+Pricing can change. Confirm the current amount on the [model page](https://poyo.ai/models/seedance-2-5) before a production rollout.
 
-When Seedance 2.5 becomes available, it is expected to follow PoYo's async generation pattern:
+## Best for
+
+- longer narrative shots
+- product and brand films
+- character-consistent social video
+
+## Important behavior
+
+- Image-frame mode cannot be combined with multimodal reference inputs.
+- Reference inputs are capped at 50 files in total.
+- When reference video is used, billed duration includes output plus reference-video duration.
+- Reference audio requires at least one reference image or video.
+
+## Async production flow
 
 ```text
-submit task -> store data.task_id -> poll while testing -> use callback_url in production
+submit -> persist data.task_id -> poll during development -> receive callback_url webhook in production
 ```
 
-The exact request body is not published in this repo because the live API schema is not final.
+Treat `finished` and `failed` as terminal states. Accept a webhook only for task IDs your system created, process it idempotently, and reconcile the final state through the status endpoint.
 
-## Repo Contents
+## Repository map
 
-| Path | What it covers |
-| --- | --- |
-| [`docs/expected-workflows.md`](docs/expected-workflows.md) | Expected Seedance 2.5 workflow areas before launch. |
-| [`docs/migration-from-seedance-2.md`](docs/migration-from-seedance-2.md) | How to think about moving from Seedance 2 to Seedance 2.5 later. |
-| [`docs/launch-checklist.md`](docs/launch-checklist.md) | Conditions required before this becomes a runnable API example. |
+- [`curl/generate.md`](curl/generate.md) — copy-paste request
+- [`node/index.mjs`](node/index.mjs) — dependency-free Node.js example
+- [`docs/production-notes.md`](docs/production-notes.md) — limits and rollout checklist
 
-## Launch Checklist
+## Links
 
-This repo should become a runnable example only after:
-
-- PoYo marks Seedance 2.5 as available
-- Production model ID is confirmed
-- API documentation is published
-- Pricing is published
-- Request and response schema are stable
-- Status polling behavior is verified
-- Webhook payload behavior is verified
-- Example outputs are available from official PoYo model samples
-
-## Security Notes
-
-- Keep `POYO_API_KEY` on the server after launch.
-- Do not expose API keys in browser code, mobile apps, screenshots, or public logs.
-- Do not use dev, staging, or test API hosts in public examples.
-- Do not publish private prompts, private media URLs, real user data, or internal task IDs.
-- Use only documented production endpoints after launch.
-
-## Run Checks
-
-```bash
-make check
-```
-
-On Windows:
-
-```powershell
-./scripts/check.ps1
-```
+- [Try Seedance 2.5 API on PoYo](https://poyo.ai/models/seedance-2-5)
+- [API reference](https://docs.poyo.ai/api-manual/video-series/seedance-2.5)
+- [All PoYo examples](https://github.com/PoyoAPI/poyo-examples)
+- [PoYo model catalog](https://poyo.ai/models)
 
 ## License
 
