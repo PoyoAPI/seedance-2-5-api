@@ -12,7 +12,7 @@
 | --- | --- | --- |
 | prompt | required | Video description. |
 | duration | required | Integer from 4 to 30 seconds. |
-| resolution | required | 480p or 720p. |
+| resolution | required | 480p, 720p, or 1080p. |
 | aspect_ratio | optional | auto, 21:9, 16:9, 4:3, 1:1, 3:4, or 9:16. |
 | image_urls | optional | One or two images for first/last-frame generation. |
 | reference_image_urls | optional | Up to 30 reference images. |

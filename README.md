@@ -6,7 +6,9 @@ Generate controllable 4-30 second videos with text, image, video, and audio refe
 
 **Answer:** To use the Seedance 2.5 API, send a server-side request to `POST https://api.poyo.ai/api/generate/submit` with model `seedance-2.5` and a PoYo API key. The examples in this repository are runnable with Node.js 22+ or cURL.
 
-Last verified against the live PoYo schema and pricing on **August 9, 2026**.
+Last verified against the live PoYo schema and pricing on **November 16, 2026**.
+
+Need faster, lower-cost 480p/720p drafts? See the [Seedance 2.5 Flash API](https://github.com/PoyoAPI/seedance-2-5-flash-api) examples (model `seedance-2.5-flash`).
 
 ## Quickstart
 
@@ -33,7 +35,7 @@ Use the exact IDs above. Product names and API model IDs are not always identica
 | --- | --- | --- |
 | prompt | required | Video description. |
 | duration | required | Integer from 4 to 30 seconds. |
-| resolution | required | 480p or 720p. |
+| resolution | required | 480p, 720p, or 1080p. |
 | aspect_ratio | optional | auto, 21:9, 16:9, 4:3, 1:1, 3:4, or 9:16. |
 | image_urls | optional | One or two images for first/last-frame generation. |
 | reference_image_urls | optional | Up to 30 reference images. |
@@ -49,6 +51,8 @@ Use the exact IDs above. Product names and API model IDs are not always identica
 | 480p, with reference video | $0.085 per billed second |
 | 720p, no reference video | $0.315 per output second |
 | 720p, with reference video | $0.19 per billed second |
+| 1080p, no reference video | $0.57 per output second |
+| 1080p, with reference video | $0.3425 per billed second |
 
 Pricing can change. Confirm the current amount on the [model page](https://poyo.ai/models/seedance-2-5) before a production rollout.
 
@@ -83,6 +87,7 @@ Treat `finished` and `failed` as terminal states. Accept a webhook only for task
 
 - [Try Seedance 2.5 API on PoYo](https://poyo.ai/models/seedance-2-5)
 - [API reference](https://docs.poyo.ai/api-manual/video-series/seedance-2.5)
+- [Seedance 2.5 Flash API examples](https://github.com/PoyoAPI/seedance-2-5-flash-api)
 - [All PoYo examples](https://github.com/PoyoAPI/poyo-examples)
 - [PoYo model catalog](https://poyo.ai/models)
 
