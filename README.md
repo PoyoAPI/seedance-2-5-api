@@ -1,6 +1,6 @@
 # Seedance 2.5 API: runnable cURL and Node.js examples
 
-[![PoYo model page](https://img.shields.io/badge/Try%20on%20PoYo-seedance--2--5--api-84cc16)](https://poyo.ai/models/seedance-2-5) [![API docs](https://img.shields.io/badge/API-docs-22d3ee)](https://docs.poyo.ai/api-manual/video-series/seedance-2.5) [![Check](https://github.com/PoyoAPI/seedance-2-5-api/actions/workflows/check.yml/badge.svg)](https://github.com/PoyoAPI/seedance-2-5-api/actions/workflows/check.yml)
+[![PoYo model page](https://img.shields.io/badge/Try%20on%20PoYo-seedance--2--5--api-84cc16)](https://poyo.ai/models/seedance-2-5) [![API docs](https://img.shields.io/badge/API-docs-22d3ee)](https://docs.poyo.ai/api-manual/video-series/seedance-2.5) [![Check](https://github.com/PoyoAPI/Seedance-2.5-API/actions/workflows/check.yml/badge.svg)](https://github.com/PoyoAPI/Seedance-2.5-API/actions/workflows/check.yml)
 
 Generate controllable 4-30 second videos with text, image, video, and audio references through PoYo's unified async API.
 
@@ -8,7 +8,7 @@ Generate controllable 4-30 second videos with text, image, video, and audio refe
 
 Last verified against the live PoYo schema and pricing on **November 16, 2026**.
 
-Need faster, lower-cost 480p/720p drafts? See the [Seedance 2.5 Flash API](https://github.com/PoyoAPI/seedance-2-5-flash-api) examples (model `seedance-2.5-flash`).
+Need faster, lower-cost 480p/720p drafts? See the [Seedance 2.5 Flash API](https://github.com/PoyoAPI/Seedance-2.5-Flash-API) examples (model `seedance-2.5-flash`).
 
 ## Quickstart
 
@@ -87,7 +87,7 @@ Treat `finished` and `failed` as terminal states. Accept a webhook only for task
 
 - [Try Seedance 2.5 API on PoYo](https://poyo.ai/models/seedance-2-5)
 - [API reference](https://docs.poyo.ai/api-manual/video-series/seedance-2.5)
-- [Seedance 2.5 Flash API examples](https://github.com/PoyoAPI/seedance-2-5-flash-api)
+- [Seedance 2.5 Flash API examples](https://github.com/PoyoAPI/Seedance-2.5-Flash-API)
 - [All PoYo examples](https://github.com/PoyoAPI/poyo-examples)
 - [PoYo model catalog](https://poyo.ai/models)
 
